@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+ previewFeatures = ["referentialIntegrity"]
+
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+
+}
+
+model Users {
+  id        Int         @id @default(autoincrement())
+  name      String
+  last_name String
+  isAdmin   Boolean     @default(false)
+  email     String      @unique
+  password  String      @unique
+  phone     String
+  createdAt DateTime    @default(now())
+  updateAt  DateTime    @updatedAt
+  updateBy  String[]
+  inventory Inventory[]
+
+}
+
+model Rooms {
+  id        Int         @id @default(autoincrement())
+  name      String      @unique
+  Inventory Inventory[]
+}
+
+model Inventory {
+  id        Int      @id @default(autoincrement())
+  category  String
+  owner     Users?   @relation(fields: [ownerId], references: [id] ,onDelete: SetNull)
+  ownerId   Int? 
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+  updateBy  Json[]
+  room      Rooms    @relation(fields: [roomName], references: [name])
+  roomName  String   @default("Storage")
+  itemImage String?
+  name      String
+}

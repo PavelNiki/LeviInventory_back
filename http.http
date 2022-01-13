@@ -1,0 +1,183 @@
+### ______________________________________________________________USER REQUEST______________________________________________
+
+POST http://localhost:3000/users/add
+Content-Type: application/json
+
+{
+
+"user":{
+    "name":"Pavel",
+"last_name":"Nikitenko",
+"phone":"11111111",
+"email":"test2jgdj@dddff2ks2.com",
+"isAdmin":true
+}
+
+}
+
+###
+
+GET http://localhost:3000/users/all
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RALm5lZWR3ZXIiLCJpZCI6OCwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjQwMzQ4NzcyLCJleHAiOjE2NDAzOTE5NzJ9.YL6IOh6tX9WUoqFcsn7h-GAJjbr4QbkCaK5aAkdxB_A
+###
+
+GET http://localhost:3000/users/2
+Content-Type: application/json
+
+###
+
+DELETE http://localhost:3000/users/delete/3
+Content-Type: application/json
+
+###
+
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+
+"email":"test@.needwer",
+"password":"123456"
+
+}
+
+
+###______________________________________________________________ROOM REQUEST______________________________________________
+
+Post http://localhost:3000/rooms/add
+Content-Type: application/json
+
+{
+
+"room":{"name":"Kitchen"}
+
+}
+
+###
+
+DELETE  http://localhost:3000/rooms/delete/4
+Content-Type: application/json
+
+###
+
+GET http://localhost:3000/rooms/all
+Content-Type: application/json
+
+###______________________________________________________________INVENTORY REQUEST___________________________________________
+
+POST http://localhost:3000/inventory/add
+Content-Type: application/json
+
+{
+
+"inventory":{
+    "category":"мебель",
+    "name":"стул"
+}
+
+}
+
+###
+
+POST http://localhost:3000/inventory/add_many
+Content-Type: application/json
+
+{
+
+"inventory":[{
+    "category":"техника",
+    "name":"монитор"
+},
+{
+    "category":"техника",
+    "name":"монитор"
+},
+{
+    "category":"техника",
+    "name":"пк"
+},
+{
+    "category":"техника",
+    "name":"пк"
+},
+{
+    "category":"прочее",
+    "name":"хз что"
+},
+{
+    "category":"прочее",
+    "name":"тоже хз"
+},
+{
+    "category":"прочее",
+    "name":"еще раз хз"
+},
+{
+    "category":"техника",
+    "name":"мышь"
+}]
+
+}
+###
+
+GET http://localhost:3000/inventory/all
+Content-Type: application/json
+
+###
+
+PATCH http://localhost:3000/inventory/update/1
+Content-Type: application/json
+
+{
+
+    "id":"14",
+    "ownerId":"7",
+    "roomName":"Node"
+
+}
+
+###
+
+GET http://localhost:3000/inventory/free
+Content-Type: application/json
+
+###
+GET http://localhost:3000/qr/one/15
+    
+###
+
+POST http://localhost:3000/inventory/make 
+Content-Type: application/json
+
+{
+
+"roomName":"Storage",
+"inventoryList":[
+    {
+        "id":"1",
+        "name":"test"
+    },
+    {
+        "id":"8",
+        "name":"test"
+    },
+     {
+        "id":"7",
+        "name":"test"
+    },
+     {
+        "id":"15",
+        "name":"test"
+    },
+    {
+        "id":"40",
+        "name":"test"
+    },
+    {
+        "id":"14",
+        "name":"test2"
+    }
+]
+
+}
