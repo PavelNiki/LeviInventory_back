@@ -1,10 +1,14 @@
+import { IUserWithInventory } from "./../models/user.model";
 import * as bcrypt from "bcrypt";
-import { userModel } from "src/models/user.model";
+
 import { prisma } from "../prisma/prisma";
 import jwt from "jsonwebtoken";
 
 class AuthService {
-  login = async (email: string, password: string) => {
+  login = async (
+    email: string,
+    password: string
+  ): Promise<{ token: string; user: IUserWithInventory }> => {
     const condidate = await prisma.users.findFirst({
       where: {
         email: {
@@ -26,7 +30,7 @@ class AuthService {
           "leviossa",
           { expiresIn: "12h" }
         );
-        return { token: token, user: userModel(condidate) };
+        return { token: token, user: condidate };
       } else {
         throw new Error("You are not admin");
       }

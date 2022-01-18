@@ -14,6 +14,7 @@ class RoomService {
       .finally(() => prisma.$disconnect());
     return newRoom;
   };
+
   removeRoom = async (id: string) => {
     const deleteRoom = await prisma.rooms
       .delete({
@@ -27,6 +28,7 @@ class RoomService {
 
     return deleteRoom;
   };
+
   takeAllRooms = async () => {
     const allRooms = await prisma.rooms
       .findMany({
@@ -39,6 +41,7 @@ class RoomService {
       .finally(() => prisma.$disconnect());
     return allRooms;
   };
+
   addManyRooms = async (rooms: Rooms[]) => {
     const items = rooms.map((item: Rooms) => {
       const room = {

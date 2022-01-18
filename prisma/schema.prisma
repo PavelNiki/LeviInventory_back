@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
- previewFeatures = ["referentialIntegrity"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 
 }
 
@@ -20,27 +20,68 @@ model Users {
   phone     String
   createdAt DateTime    @default(now())
   updateAt  DateTime    @updatedAt
-  updateBy  String[]
+  updateBy  Json[]
+  image     String
   inventory Inventory[]
-
+  Setups    Setups[]
 }
 
 model Rooms {
   id        Int         @id @default(autoincrement())
   name      String      @unique
   Inventory Inventory[]
+  Setups    Setups[]
 }
 
 model Inventory {
-  id        Int      @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())
+  categorys Categories @relation(fields: [category], references: [name])
   category  String
-  owner     Users?   @relation(fields: [ownerId], references: [id] ,onDelete: SetNull)
-  ownerId   Int? 
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  owner     Users?     @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  ownerId   Int?
+  createdAt DateTime   @default(now())
+  updateAt  DateTime   @updatedAt
   updateBy  Json[]
-  room      Rooms    @relation(fields: [roomName], references: [name])
-  roomName  String   @default("Storage")
+  room      Rooms      @relation(fields: [roomName], references: [name])
+  roomName  String     @default("Storage")
   itemImage String?
   name      String
+  setups    Setups?    @relation(fields: [setupId], references: [id])
+  setupId   Int?
+  Defect    Defect[]
+}
+
+model Setups {
+  id        Int         @id @default(autoincrement())
+  active    Boolean
+  owner     Users?      @relation(fields: [ownerId], references: [id], onDelete: SetNull)
+  ownerId   Int?
+  name      String
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  updatedBy Json[]
+  rooms     Rooms       @relation(fields: [roomName], references: [name])
+  roomName  String
+  Inventory Inventory[]
+}
+
+model Defect {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String
+  image       String[]
+  inventory   Inventory @relation(fields: [itemId], references: [id])
+  itemId      Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  updatedBy   Json[]
+}
+
+model Categories {
+  id        Int         @id @default(autoincrement())
+  name      String      @unique
+  Inventory Inventory[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  updatedBy Json[]
 }

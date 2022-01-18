@@ -24,6 +24,7 @@ class QRC {
 
     return res;
   };
+
   createQr = async (id: string): Promise<any> => {
     const inventory = await prisma.inventory.findFirst({
       where: {

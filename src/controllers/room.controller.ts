@@ -13,6 +13,7 @@ export const createRoom = async (req: Request, res: Response) => {
     res.status(BAD_REQUEST).json(e);
   }
 };
+
 export const deleteRoom = async (req: Request, res: Response) => {
   try {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
@@ -22,6 +23,7 @@ export const deleteRoom = async (req: Request, res: Response) => {
     res.status(BAD_REQUEST).json(e);
   }
 };
+
 export const allRooms = async (req: Request, res: Response) => {
   try {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
@@ -31,11 +33,12 @@ export const allRooms = async (req: Request, res: Response) => {
     res.status(BAD_REQUEST).json(e);
   }
 };
+
 export const createManyRooms = async (req: Request, res: Response) => {
   try {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     const newRooms = await RoomService.addManyRooms(req.body.room);
-    res.status(CREATED).json(`Добавлено ${newRooms.count} новых комнат`);
+    res.status(CREATED).json(`Add ${newRooms.count} new rooms`);
   } catch (e) {
     res.status(BAD_REQUEST).json(e);
   }

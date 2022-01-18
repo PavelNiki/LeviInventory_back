@@ -8,6 +8,7 @@ const option = {
   secretOrKey: "leviossa",
 };
 const prisma = new PrismaClient();
+
 module.exports = (passport: { use: (arg0: JwtStrategy.Strategy) => void }) => {
   passport.use(
     new JwtStrategy.Strategy(option, (payload, done) => {

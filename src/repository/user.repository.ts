@@ -1,17 +1,23 @@
-import { Users } from ".prisma/client";
+import {
+  Prisma,
+  PrismaClient,
+  Users,
+  Inventory,
+  Rooms,
+  Categories,
+  Setups,
+  Defect,
+} from "@prisma/client";
 import * as bcrypt from "bcrypt";
-import { userModel, allUsersModel } from "src/models/user.model";
-import { prisma } from "../prisma/prisma";
-import InventoryService from "./inventory.service";
-
-class UserService {
-  addUser = async (user: Users) => {
+const prisma = new PrismaClient();
+export default class User {
+  addUser = async (user: Prisma.UsersCreateInput): Promise<Users | void> => {
     const condidate = await prisma.users.findFirst({
       where: {
         email: user.email,
       },
     });
-    console.log("condidate", condidate);
+
     if (condidate) {
       throw new Error("Email already use");
     } else {
@@ -28,6 +34,9 @@ class UserService {
               isAdmin: true,
               phone: user.phone,
               image: user.image,
+            },
+            include: {
+              inventory: true,
             },
           })
 
@@ -61,11 +70,11 @@ class UserService {
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           .finally(() => prisma.$disconnect());
 
-        return userModel(newUser as Users);
+        return newUser;
       }
     }
   };
-  takeAllUsers = async () => {
+  takeAllUsers = async (): Promise<Users[] | void> => {
     const allUsers = await prisma.users
       .findMany({
         include: {
@@ -75,10 +84,10 @@ class UserService {
       .catch((e) => console.error(e))
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       .finally(() => prisma.$disconnect());
-    return allUsersModel(allUsers as Users[]);
+    return allUsers;
   };
 
-  takeOneUser = async (userId: string) => {
+  takeOneUser = async (userId: string): Promise<Users | null> => {
     const oneUser = await prisma.users.findFirst({
       where: {
         id: Number(userId),
@@ -87,10 +96,10 @@ class UserService {
         inventory: true,
       },
     });
-    return userModel(oneUser as Users);
+    return oneUser;
   };
 
-  deleteUser = async (userId: string) => {
+  deleteUser = async (userId: string): Promise<Users | null> => {
     const deleteUser = await prisma.users.delete({
       where: {
         id: Number(userId),
@@ -100,5 +109,3 @@ class UserService {
     return deleteUser;
   };
 }
-
-export default new UserService();

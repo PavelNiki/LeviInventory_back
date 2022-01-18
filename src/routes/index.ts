@@ -24,6 +24,7 @@ import {
 } from "src/controllers/inventory.controller";
 import { getAllQrcode, getOneQrcode } from "src/controllers/qrcode.controller";
 import { authUser } from "src/controllers/auth.controller";
+import { addCategory } from "src/controllers/category.controller";
 // User-route
 const userRouter = Router();
 
@@ -113,21 +114,25 @@ qrRouter.get("/one/:id", getOneQrcode);
 // auth rout
 const authRouter = Router();
 authRouter.post("/login", authUser);
+
+// category router
+const categoryRouter = Router();
+categoryRouter.post("/add", addCategory);
 // Export the base-router
 const baseRouter = Router();
 baseRouter.use(
   "/users",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   userRouter
 );
 baseRouter.use(
   "/rooms",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   roomRouter
 );
 baseRouter.use(
   "/inventory",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   inventoryRouter
 );
 baseRouter.use(
@@ -136,4 +141,5 @@ baseRouter.use(
   qrRouter
 );
 baseRouter.use("/auth", authRouter);
+baseRouter.use("/category", categoryRouter);
 export default baseRouter;

@@ -1,10 +1,10 @@
-import { Users,Inventory } from "@prisma/client";
-
-interface IUserWithInventory extends Users{
-  inventory?:Inventory
+import { Users, Inventory } from "@prisma/client";
+import { Prisma } from "@prisma/client";
+export interface IUserWithInventory extends Users {
+  inventory?: Inventory;
 }
 
-export const userModel = (user:IUserWithInventory) => {
+export const userModel = (user: IUserWithInventory) => {
   const model = {
     id: user.id,
     name: user.name,
@@ -12,11 +12,11 @@ export const userModel = (user:IUserWithInventory) => {
     email: user.email,
     phone: user.phone,
     isAdmin: user.isAdmin,
-    inventory:user.inventory
+    inventory: user?.inventory,
   };
   return model;
 };
-export const allUsersModel = (users:Users[] ) => {
+export const allUsersModel = (users: Users[]) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   const model = users.map((user: IUserWithInventory) => {
     const userModel = {

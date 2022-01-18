@@ -20,6 +20,7 @@ export const createUser = async (req: Request, res: Response) => {
     res.status(BAD_REQUEST).json({ errors: `Invalid email adress` });
   }
 };
+
 export const allUsers = async (req: Request, res: Response) => {
   try {
     const allUsers = await UserService.takeAllUsers();
@@ -28,6 +29,7 @@ export const allUsers = async (req: Request, res: Response) => {
     res.status(BAD_REQUEST).json(e);
   }
 };
+
 export const oneUser = async (req: Request, res: Response) => {
   try {
     const user = await UserService.takeOneUser(req.params.id);
@@ -36,6 +38,7 @@ export const oneUser = async (req: Request, res: Response) => {
     res.status(BAD_REQUEST).json(e);
   }
 };
+
 export const deleteUser = async (req: Request, res: Response) => {
   try {
     const user = await UserService.deleteUser(req.params.id);
