@@ -1,9 +1,21 @@
-import { Prisma, PrismaClient, Inventory } from "@prisma/client";
-import { difference, differenceWith } from "lodash";
+import { Prisma, Inventory } from "@prisma/client";
+import { difference } from "lodash";
 import _ from "lodash";
+import { prisma } from "../prisma/prisma";
 
-const prisma = new PrismaClient();
+// prisma.$use(async (params, next) => {
+//   const before = Date.now();
 
+//   const result = await next(params);
+
+//   const after = Date.now();
+
+//   console.log(
+//     `Query ${params.model}.${params.action} took ${after - before}ms`
+//   );
+
+//   return result;
+// });
 export default class Inventories {
   addOneItem = async (
     item: Prisma.InventoryUncheckedCreateInput
@@ -25,21 +37,13 @@ export default class Inventories {
   };
 
   addManyItems = async (
-    invent: Prisma.InventoryUncheckedCreateInput[]
+    items: Prisma.InventoryUncheckedCreateInput[]
   ): Promise<Prisma.BatchPayload> => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    const items = invent.map((item: Prisma.InventoryUncheckedCreateInput) => {
-      const invent = {
-        name: item.name,
-        itemImage: item.itemImage,
-        roomName: item.roomName,
-        category: item.category,
-      };
-      return invent;
-    });
+
     const manyItems = await prisma.inventory.createMany({
       data: items,
-      skipDuplicates: false,
+      skipDuplicates: true,
     });
 
     return manyItems;
@@ -123,5 +127,12 @@ export default class Inventories {
       },
     });
     return res;
+  };
+  deleteOne = async (itemId: string): Promise<Inventory | null> => {
+    return await prisma.inventory.delete({
+      where: {
+        id: +itemId,
+      },
+    });
   };
 }

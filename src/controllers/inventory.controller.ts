@@ -86,3 +86,14 @@ export const makeAnInventory = async (
     res.status(BAD_REQUEST).json(e);
   }
 };
+export const deleteItem = async (
+  req: Request,
+  res: Response
+): Promise<InventoryModel | void> => {
+  try {
+    const deletedItme = await InventoryService.deleteItem(req.params.id);
+    res.status(OK).json(deletedItme);
+  } catch (error) {
+    res.status(BAD_REQUEST).json(error);
+  }
+};

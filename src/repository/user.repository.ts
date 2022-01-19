@@ -1,15 +1,7 @@
-import {
-  Prisma,
-  PrismaClient,
-  Users,
-  Inventory,
-  Rooms,
-  Categories,
-  Setups,
-  Defect,
-} from "@prisma/client";
+import { Prisma, Users } from "@prisma/client";
 import * as bcrypt from "bcrypt";
-const prisma = new PrismaClient();
+import { prisma } from "../prisma/prisma";
+
 export default class User {
   addUser = async (user: Prisma.UsersCreateInput): Promise<Users | void> => {
     const condidate = await prisma.users.findFirst({

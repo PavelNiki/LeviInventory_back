@@ -25,6 +25,7 @@ import {
 import { getAllQrcode, getOneQrcode } from "src/controllers/qrcode.controller";
 import { authUser } from "src/controllers/auth.controller";
 import { addCategory } from "src/controllers/category.controller";
+import { setupRouter } from "./setupRouter";
 // User-route
 const userRouter = Router();
 
@@ -142,4 +143,5 @@ baseRouter.use(
 );
 baseRouter.use("/auth", authRouter);
 baseRouter.use("/category", categoryRouter);
+baseRouter.use("/setup", setupRouter);
 export default baseRouter;

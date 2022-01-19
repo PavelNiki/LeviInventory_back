@@ -11,16 +11,18 @@ import Inventories from "src/repository/inventory.repository";
 // а значения пушатся в массив,котрый отправляется на бэк
 const inventory = new Inventories();
 class InventoryService {
-  addOneItem = async (item: InventoryModel): Promise<Inventory | void> => {
+  addOneItem = async (
+    item: Prisma.InventoryUncheckedCreateInput
+  ): Promise<Inventory | void> => {
     return await inventory.addOneItem(item);
   };
   addManyItems = async (
-    item: InventoryModel[]
+    item: Prisma.InventoryUncheckedCreateInput[]
   ): Promise<Prisma.BatchPayload> => {
     return await inventory.addManyItems(item);
   };
   updateItem = async (
-    item: InventoryModel,
+    item: Prisma.InventoryUncheckedUpdateInput,
     adminId: string
   ): Promise<Inventory> => {
     return await inventory.updateItem(item, adminId);
@@ -35,9 +37,12 @@ class InventoryService {
   };
   inventoryMake = async (searchObject: {
     roomName: string;
-    inventoryList: InventoryModel[];
+    inventoryList: Inventory[];
   }): Promise<Inventory[]> => {
     return await inventory.inventoryMake(searchObject);
+  };
+  deleteItem = async (itemId: string): Promise<Inventory | null> => {
+    return await inventory.deleteOne(itemId);
   };
   // removeUserInventoryToStorage = async () => {
   //   await prisma.inventory.updateMany({

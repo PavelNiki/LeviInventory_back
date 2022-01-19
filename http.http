@@ -215,3 +215,21 @@ Content-Type: application/json
     "name":"device"
 
 }
+
+###___________________________________________________________CATEGORY____________________________________________________
+
+POST http://localhost:8080/setup/add
+Content-Type: application/json
+
+{
+
+"setup":{
+
+    "name":"device",
+    "ownerId":2,
+    "active":true,
+    "roomName":"node",
+    "Inventory":[2,3,5,7]
+}
+
+}
