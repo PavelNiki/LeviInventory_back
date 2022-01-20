@@ -2,7 +2,6 @@ import { Users } from ".prisma/client";
 import * as bcrypt from "bcrypt";
 import { userModel, allUsersModel } from "src/models/user.model";
 import { prisma } from "../prisma/prisma";
-import InventoryService from "./inventory.service";
 
 class UserService {
   addUser = async (user: Users) => {
@@ -11,7 +10,7 @@ class UserService {
         email: user.email,
       },
     });
-    console.log("condidate", condidate);
+
     if (condidate) {
       throw new Error("Email already use");
     } else {

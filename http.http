@@ -58,13 +58,30 @@ Content-Type: application/json
 
 ###
 
-DELETE  http://localhost:8080/rooms/delete/4
+DELETE  http://localhost:8080/rooms/delete/3
 Content-Type: application/json
 
 ###
 
 GET http://localhost:8080/rooms/all
 Content-Type: application/json
+
+###
+
+Post http://localhost:8080/rooms/add_many
+Content-Type: application/json
+
+{
+
+"rooms":[{"name":"kitchen"},{"name":"ruby"}]
+
+}
+
+###
+GET http://localhost:8080/rooms/1
+Content-Type: application/json
+
+###
 
 ###______________________________________________________________INVENTORY REQUEST___________________________________________
 
@@ -229,7 +246,10 @@ Content-Type: application/json
     "ownerId":2,
     "active":true,
     "roomName":"node",
-    "Inventory":[2,3,5,7]
+    "Inventory": [{"id":40},{"id":44},{"id":45}]
+       
+    
+    
 }
 
 }

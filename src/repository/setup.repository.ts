@@ -2,32 +2,37 @@ import { prisma } from "../prisma/prisma";
 import { Setups, Prisma } from "@prisma/client";
 
 export default class Setup {
-  addOne = async (
-    item: Prisma.SetupsUncheckedCreateInput
-  ): Promise<Setups | void> => {
-    console.log("item", item);
+  addOne = async (item: Prisma.SetupsCreateInput): Promise<Setups | void> => {
     const createdItem = await prisma.setups
       .create({
-        data: item,
+        data: {
+          ...item,
+          Inventory: {
+            connect: item.Inventory as Prisma.InventoryWhereUniqueInput,
+          },
+        },
+        include: {
+          Inventory: true,
+        },
       })
       .catch((e) => console.error(e))
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       .finally(() => prisma.$disconnect());
     return createdItem;
   };
-  addMany = async (
-    items: Prisma.SetupsUncheckedCreateInput[]
-  ): Promise<Prisma.BatchPayload> => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 
-    const manyItems = await prisma.setups.createMany({
-      data: items,
-      skipDuplicates: true,
+  deleteOne = async (
+    itemId: string,
+    roomName: string
+  ): Promise<Setups | null> => {
+    await prisma.inventory.updateMany({
+      where: {
+        setupId: +itemId,
+      },
+      data: {
+        roomName: roomName,
+      },
     });
-
-    return manyItems;
-  };
-  deleteOne = async (itemId: string): Promise<Setups | null> => {
     return await prisma.setups.delete({
       where: {
         id: +itemId,
@@ -46,7 +51,13 @@ export default class Setup {
         ...item,
 
         updatedBy: {
-          push: { adminId: adminId, updateInfo: item as any },
+          push: {
+            adminId: adminId,
+            updateInfo: item as Prisma.SetupsUpdateupdatedByInput,
+          },
+        },
+        Inventory: {
+          connect: item.Inventory as Prisma.InventoryWhereUniqueInput,
         },
       },
     });

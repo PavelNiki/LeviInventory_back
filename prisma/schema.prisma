@@ -46,7 +46,7 @@ model Inventory {
   roomName  String     @default("Storage")
   itemImage String?
   name      String
-  setups    Setups?    @relation(fields: [setupId], references: [id])
+  setups    Setups?    @relation(fields: [setupId], references: [id], onDelete: SetNull)
   setupId   Int?
   Defect    Defect[]
 }

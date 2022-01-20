@@ -5,17 +5,24 @@ export default class Category {
   addOne = async (
     item: Prisma.CategoriesUncheckedCreateInput
   ): Promise<Categories | void> => {
-    const createdItem = await prisma.categories
-      .create({
-        data: {
-          name: item.name,
+    const checkCategory = await prisma.categories.findFirst({
+      where: {
+        name: item.name,
+      },
+    });
+    if (checkCategory) {
+      throw new Error("Category already exias");
+    } else {
+      const newCategory = await prisma.categories.create({
+        data: item,
+        include: {
+          Inventory: true,
         },
-      })
-      .catch((e) => console.error(e))
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      .finally(() => prisma.$disconnect());
-    return createdItem;
+      });
+      return newCategory;
+    }
   };
+
   addMany = async (
     items: Prisma.CategoriesUncheckedCreateInput[]
   ): Promise<Prisma.BatchPayload> => {
@@ -28,6 +35,7 @@ export default class Category {
 
     return manyItems;
   };
+
   deleteOne = async (itemId: string): Promise<Categories | null> => {
     return await prisma.categories.delete({
       where: {
@@ -35,8 +43,9 @@ export default class Category {
       },
     });
   };
+
   updateCategory = async (
-    item: Prisma.CategoriesUncheckedUpdateInput,
+    item: Categories,
     adminId: string
   ): Promise<Categories | null> => {
     return await prisma.categories.update({
@@ -48,6 +57,18 @@ export default class Category {
         updatedBy: {
           push: { adminId: adminId, updateInfo: item as any },
         },
+      },
+    });
+  };
+
+  getAllCategories = async (): Promise<Categories[]> => {
+    return await prisma.categories.findMany();
+  };
+
+  getOneCategories = async (id: string): Promise<Categories | null> => {
+    return await prisma.categories.findUnique({
+      where: {
+        id: +id,
       },
     });
   };

@@ -5,18 +5,24 @@ import SetupService from "src/services/setup.service";
 
 const { BAD_REQUEST, CREATED, OK } = StatusCodes;
 
-export const addOne = async (req: Request, res: Response) => {
+export const addOne = async (
+  req: Request,
+  res: Response
+): Promise<Setups | void> => {
   const { setup } = req.body;
   try {
     const newItem = await SetupService.addOne(
-      setup as Prisma.SetupsUncheckedCreateInput
+      setup as Prisma.SetupsCreateInput
     );
     res.status(CREATED).json(newItem);
   } catch (error) {
     res.status(BAD_REQUEST).json(error);
   }
 };
-export const updateItem = async (req: Request, res: Response) => {
+export const updateItem = async (
+  req: Request,
+  res: Response
+): Promise<Setups | void> => {
   const { setup } = req.body;
   const { id } = req.params;
   try {
@@ -25,6 +31,21 @@ export const updateItem = async (req: Request, res: Response) => {
       id
     );
     res.status(CREATED).json(newItem);
+  } catch (error) {
+    res.status(BAD_REQUEST).json(error);
+  }
+};
+export const deleteItem = async (
+  req: Request,
+  res: Response
+): Promise<Setups | void> => {
+  const { itemId, roomName } = req.body;
+  try {
+    const deletedItem = await SetupService.deleteOne(
+      itemId as string,
+      roomName as string
+    );
+    res.status(OK).json(deletedItem);
   } catch (error) {
     res.status(BAD_REQUEST).json(error);
   }

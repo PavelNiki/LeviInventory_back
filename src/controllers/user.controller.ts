@@ -21,7 +21,7 @@ export const createUser = async (req: Request, res: Response) => {
   }
 };
 
-export const allUsers = async (req: Request, res: Response) => {
+export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const allUsers = await UserService.takeAllUsers();
     res.status(OK).json(allUsers);
@@ -30,7 +30,7 @@ export const allUsers = async (req: Request, res: Response) => {
   }
 };
 
-export const oneUser = async (req: Request, res: Response) => {
+export const getOneUser = async (req: Request, res: Response) => {
   try {
     const user = await UserService.takeOneUser(req.params.id);
     res.status(OK).json(user);

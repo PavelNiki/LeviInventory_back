@@ -1,111 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from "express";
-import {
-  createUser,
-  allUsers,
-  oneUser,
-  deleteUser,
-} from "../controllers/user.controller";
+import { userRouter } from "./userRouter";
 import passport from "passport";
-import {
-  allRooms,
-  createRoom,
-  deleteRoom,
-  createManyRooms,
-} from "src/controllers/room.controller";
-import {
-  addMany,
-  addOne,
-  getAllInventory,
-  getFreeInventory,
-  makeAnInventory,
-  updateInventoryItem,
-} from "src/controllers/inventory.controller";
+import { roomRouter } from "./roomRouter";
+import { inventoryRouter } from "./inventoryRouter";
 import { getAllQrcode, getOneQrcode } from "src/controllers/qrcode.controller";
 import { authUser } from "src/controllers/auth.controller";
-import { addCategory } from "src/controllers/category.controller";
+import { categoryRouter } from "./categoryRouter";
 import { setupRouter } from "./setupRouter";
-// User-route
-const userRouter = Router();
-
-userRouter.post(
-  "/add",
-
-  createUser
-);
-
-userRouter.get(
-  "/all",
-
-  allUsers
-);
-userRouter.get(
-  "/:id",
-
-  oneUser
-);
-userRouter.delete(
-  "/delete/:id",
-
-  deleteUser
-);
-
-const roomRouter = Router();
-roomRouter.post(
-  "/add",
-
-  createRoom
-);
-roomRouter.delete(
-  "/delete/:id",
-
-  deleteRoom
-);
-roomRouter.get(
-  "/all",
-
-  allRooms
-);
-roomRouter.post(
-  "/add_many",
-
-  createManyRooms
-);
-
-// inventory
-const inventoryRouter = Router();
-
-inventoryRouter.post(
-  "/add",
-
-  addOne
-);
-inventoryRouter.post(
-  "/add_many",
-
-  addMany
-);
-inventoryRouter.get(
-  "/all",
-
-  getAllInventory
-);
-inventoryRouter.patch(
-  "/update/:id",
-
-  updateInventoryItem
-);
-inventoryRouter.get(
-  "/free",
-
-  getFreeInventory
-);
-inventoryRouter.post(
-  "/make",
-
-  makeAnInventory
-);
 
 //  qr
 const qrRouter = Router();
@@ -117,8 +20,7 @@ const authRouter = Router();
 authRouter.post("/login", authUser);
 
 // category router
-const categoryRouter = Router();
-categoryRouter.post("/add", addCategory);
+
 // Export the base-router
 const baseRouter = Router();
 baseRouter.use(

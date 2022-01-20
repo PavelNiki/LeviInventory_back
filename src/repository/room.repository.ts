@@ -2,49 +2,79 @@ import { prisma } from "../prisma/prisma";
 import { Rooms, Prisma } from "@prisma/client";
 
 export default class Room {
-  addOne = async (
-    item: Prisma.RoomsUncheckedCreateInput
-  ): Promise<Rooms | void> => {
-    const createdItem = await prisma.rooms
+  addRoom = async (room: Prisma.RoomsCreateInput): Promise<Rooms | void> => {
+    // const newRoom = await prisma.rooms
+    //   .create({
+    //     data: room,
+    //   })
+    //   .catch((e) => console.error(e));
+
+    // return newRoom;
+    return await prisma.rooms
       .create({
-        data: {
-          name: item.name,
+        data: room,
+      })
+      .catch((e) => console.error(e));
+  };
+
+  deleteRoom = async (id: string) => {
+    const deleteRoom = await prisma.rooms
+      .delete({
+        where: {
+          id: Number(id),
         },
       })
-      .catch((e) => console.error(e))
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      .finally(() => prisma.$disconnect());
-    return createdItem;
-  };
-  addMany = async (
-    items: Prisma.RoomsUncheckedCreateInput[]
-  ): Promise<Prisma.BatchPayload> => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      .catch((e: any) => console.error(e));
 
-    const manyItems = await prisma.rooms.createMany({
-      data: items,
-      skipDuplicates: true,
-    });
+    return deleteRoom;
+  };
+  getOneRoom = async (id: string): Promise<Rooms | void | null> => {
+    const room = await prisma.rooms
+      .findFirst({
+        where: {
+          id: +id,
+        },
+        include: {
+          Inventory: true,
+          Setups: true,
+        },
+      })
+      .catch((e) => console.error(e));
+    return room;
+  };
+  getAllRooms = async (): Promise<Rooms[] | void> => {
+    const allRooms = await prisma.rooms
+      .findMany({
+        include: {
+          Inventory: true,
+          Setups: true,
+        },
+      })
+      .catch((e) => console.error(e));
+    return allRooms;
+  };
 
-    return manyItems;
+  addManyRooms = async (rooms: Prisma.RoomsCreateManyInput): Promise<any> => {
+    const createRooms = await prisma.rooms
+      .createMany({
+        data: rooms,
+        skipDuplicates: true,
+      })
+      .catch((e) => console.error(e));
+    return createRooms;
   };
-  deleteOne = async (itemId: string): Promise<Rooms | null> => {
-    return await prisma.rooms.delete({
-      where: {
-        id: +itemId,
-      },
-    });
-  };
-  updateCategory = async (
-    item: Prisma.RoomsUncheckedUpdateInput
-  ): Promise<Rooms | null> => {
-    return await prisma.rooms.update({
-      where: {
-        id: Number(item.id),
-      },
-      data: {
-        name: item.name,
-      },
-    });
+  updateRoom = async (item: Rooms) => {
+    return await prisma.rooms
+      .update({
+        where: {
+          id: +item.id,
+        },
+        data: item,
+        include: {
+          Inventory: true,
+          Setups: true,
+        },
+      })
+      .catch((e) => console.error(e));
   };
 }
