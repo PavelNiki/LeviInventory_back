@@ -65,7 +65,7 @@ export default class Category {
     return await prisma.categories.findMany();
   };
 
-  getOneCategories = async (id: string): Promise<Categories | null> => {
+  getOneCategory = async (id: string): Promise<Categories | null> => {
     return await prisma.categories.findUnique({
       where: {
         id: +id,

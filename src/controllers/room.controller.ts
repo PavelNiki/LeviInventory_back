@@ -11,7 +11,7 @@ export const createRoom = async (
 ): Promise<Rooms | void> => {
   try {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    const room = await RoomService.addRoom(req.body.room);
+    const room = await RoomService.addRoom(req.body);
     res.status(CREATED).json(room);
   } catch (e) {
     res.status(BAD_REQUEST).json(e);

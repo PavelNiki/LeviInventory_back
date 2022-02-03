@@ -6,6 +6,7 @@ import path from "path";
 import helmet from "helmet";
 import passport from "passport";
 
+import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
 import StatusCodes from "http-status-codes";
 import "express-async-errors";
@@ -19,7 +20,11 @@ const { BAD_REQUEST } = StatusCodes;
 /************************************************************************************
  *                              Set basic express settings
  ***********************************************************************************/
-app.use(cors());
+app.use(
+  cors({
+    exposedHeaders: "Authorization",
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());

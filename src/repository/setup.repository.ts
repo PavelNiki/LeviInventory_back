@@ -62,4 +62,21 @@ export default class Setup {
       },
     });
   };
+  getOne = async (id: number): Promise<Setups | null> => {
+    return await prisma.setups.findFirst({
+      where: {
+        id: id,
+      },
+      include: {
+        Inventory: true,
+      },
+    });
+  };
+  getAll = async (): Promise<Setups[]> => {
+    return await prisma.setups.findMany({
+      include: {
+        Inventory: true,
+      },
+    });
+  };
 }

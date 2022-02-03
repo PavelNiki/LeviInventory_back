@@ -1,0 +1,36 @@
+
+Post http://localhost:8080/rooms/add
+Content-Type: application/json
+
+{
+
+"room":{"name":"node"}
+
+}
+
+###
+
+DELETE  http://localhost:8080/rooms/delete/3
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/rooms/all
+Content-Type: application/json
+
+###
+
+Post http://localhost:8080/rooms/add_many
+Content-Type: application/json
+
+{
+
+"rooms":[{"name":"kitchen"},{"name":"ruby"}]
+
+}
+
+###
+GET http://localhost:8080/rooms/1
+Content-Type: application/json
+
+###

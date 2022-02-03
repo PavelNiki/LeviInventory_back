@@ -11,7 +11,11 @@ class Categorys {
   ): Promise<Categories | void> => {
     return await categories.addOne(item);
   };
-
+  addCategories = async (
+    items: Prisma.CategoriesUncheckedCreateInput[]
+  ): Promise<any> => {
+    return await categories.addMany(items);
+  };
   editCategory = async (
     item: Categories,
     adminId: string
@@ -28,7 +32,7 @@ class Categorys {
   };
 
   getOneCategories = async (id: string) => {
-    return await categories.getOneCategories(id);
+    return await categories.getOneCategory(id);
   };
 }
 export default new Categorys();

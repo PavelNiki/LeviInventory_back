@@ -19,13 +19,8 @@ export default class User {
         const newUser = await prisma.users
           .create({
             data: {
-              name: user.name,
-              last_name: user.last_name,
+              ...user,
               password: hashPassword,
-              email: user.email,
-              isAdmin: true,
-              phone: user.phone,
-              image: user.image,
             },
             include: {
               inventory: true,
@@ -46,12 +41,8 @@ export default class User {
         const newUser = await prisma.users
           .create({
             data: {
-              name: user.name,
-              last_name: user.last_name,
+              ...user,
               password: hashPassword,
-              email: user.email,
-              phone: user.phone,
-              image: user.image,
             },
             include: {
               inventory: true,
@@ -99,5 +90,30 @@ export default class User {
     });
     // await InventoryService.removeUserInventoryToStorage();
     return deleteUser;
+  };
+  updateUser = async (
+    user: Prisma.UsersUncheckedUpdateInput,
+    adminId: string
+  ): Promise<Users | void> => {
+    const { id, ...rest } = user;
+    try {
+      const updatedUser = await prisma.users.update({
+        where: {
+          id: id as number,
+        },
+        data: {
+          ...rest,
+          updateBy: {
+            push: {
+              adminId: adminId,
+              updatedInfo: rest as any,
+            },
+          },
+        },
+      });
+      return updatedUser;
+    } catch (error) {
+      console.log(error);
+    }
   };
 }

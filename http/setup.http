@@ -1,0 +1,18 @@
+POST http://localhost:8080/setup/add
+Content-Type: application/json
+
+{
+
+"setup":{
+
+    "name":"device",
+    "ownerId":2,
+    "active":true,
+    "roomName":"node",
+    "Inventory": [{"id":40},{"id":44},{"id":45}]
+       
+    
+    
+}
+
+}

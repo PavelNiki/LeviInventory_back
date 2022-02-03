@@ -3,12 +3,13 @@ import StatusCodes from "http-status-codes";
 import { Request, Response } from "express";
 import UserService from "src/services/user.service";
 import { isValid } from "../middleware/validate";
-
+import { UserInputModel } from "src/models/user.model";
 const { BAD_REQUEST, CREATED, OK } = StatusCodes;
 
 export const createUser = async (req: Request, res: Response) => {
+  const user: UserInputModel = req.body.user;
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  if (isValid(req.body.user)) {
+  if (isValid(user)) {
     try {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       const user = await UserService.addUser(req.body.user);

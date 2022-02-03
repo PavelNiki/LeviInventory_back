@@ -2,6 +2,7 @@
 import { Router } from "express";
 import {
   addCategory,
+  addManyCategories,
   deleteCategory,
   getAllCategories,
   getOneCategories,
@@ -15,3 +16,4 @@ categoryRouter.delete("/delete/:id", deleteCategory);
 categoryRouter.patch("/update", updateCategory);
 categoryRouter.get("/all", getAllCategories);
 categoryRouter.get("/one/:id", getOneCategories);
+categoryRouter.post("add_many", addManyCategories);

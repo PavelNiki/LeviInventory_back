@@ -9,4 +9,6 @@ import {
 export const setupRouter = Router();
 setupRouter.post("/add", addOne);
 setupRouter.patch("/update/:id", updateItem);
-setupRouter.delete("/delete", deleteItem);
+setupRouter.delete("/delete/:id", deleteItem);
+setupRouter.get("/one/:id");
+setupRouter.get("/all");

@@ -3,6 +3,7 @@ import { difference } from "lodash";
 import _ from "lodash";
 import { prisma } from "../prisma/prisma";
 
+// ? something like a logger data base operation
 // prisma.$use(async (params, next) => {
 //   const before = Date.now();
 
@@ -16,6 +17,7 @@ import { prisma } from "../prisma/prisma";
 
 //   return result;
 // });
+
 export default class Inventories {
   addOneItem = async (
     item: Prisma.InventoryUncheckedCreateInput
@@ -80,11 +82,13 @@ export default class Inventories {
         roomName: {
           contains: "Storage",
         },
+        setupId: null,
       },
     });
     return freeInventory;
   };
 
+  // ?need to discuss
   // removeUserInventoryToStorage = async () => {
   //   await prisma.inventory.updateMany({
   //     where: {

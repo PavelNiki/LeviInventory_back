@@ -27,7 +27,7 @@ inventoryRouter.get(
   getAllInventory
 );
 inventoryRouter.patch(
-  "/update/:id",
+  "/update/",
 
   updateInventoryItem
 );

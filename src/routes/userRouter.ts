@@ -28,3 +28,4 @@ userRouter.delete(
 
   deleteUser
 );
+userRouter.patch("/update");

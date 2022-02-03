@@ -1,0 +1,131 @@
+POST http://localhost:8080/inventory/add
+Content-Type: application/json
+
+{
+
+"inventory":{
+    "id":"3",
+    "category":"furniture",
+    "name":"table",
+    "roomName":"node",
+    "itemImage":"{{$timestamp}}"
+}
+
+}
+
+###
+
+POST http://localhost:8080/inventory/add_many
+Content-Type: application/json
+
+{
+
+"inventory":[{
+    "category":"furniture",
+    "name":"монитор",
+    "roomName":"node",
+    "itemImage":"{{$timestamp}}"
+},
+{
+    "category":"furniture",
+    "name":"монитор","roomName":"node",
+    "itemImage":"{{$timestamp}}"
+},
+{
+    "category":"device",
+    "name":"пк",
+    "roomName":"node",
+    "itemImage":"{{$timestamp}}"
+},
+{
+    "category":"device",
+    "name":"пк",
+    "roomName":"node",
+    "itemImage":"{{$timestamp}}"
+},
+{
+    "category":"device",
+    "name":"хз что",
+    "roomName":"node",
+    "itemImage":"{{$timestamp}}"
+},
+{
+    "category":"device",
+    "name":"тоже хз",
+    "roomName":"node",
+    "itemImage":"{{$timestamp}}"
+},
+{
+    "category":"device",
+    "name":"еще раз хз",
+    "roomName":"node",
+    "itemImage":"{{$timestamp}}"
+},
+{
+    "category":"device",
+    "name":"мышь",
+    "roomName":"node",
+    "itemImage":"{{$timestamp}}"
+}]
+
+}
+###
+
+GET http://localhost:8080/inventory/all
+Content-Type: application/json
+
+###
+
+PATCH http://localhost:8080/inventory/update/2
+Content-Type: application/json
+
+{
+
+    "id":"3",
+    "ownerId":"2",
+    "roomName":"node"
+
+}
+
+###
+
+GET http://localhost:8080/inventory/free
+Content-Type: application/json
+
+###
+
+POST http://localhost:8080/inventory/make 
+Content-Type: application/json
+
+{
+
+"roomName":"Storage",
+"inventoryList":[
+    {
+        "id":"1",
+        "name":"test"
+    },
+    {
+        "id":"8",
+        "name":"test"
+    },
+     {
+        "id":"7",
+        "name":"test"
+    },
+     {
+        "id":"15",
+        "name":"test"
+    },
+    {
+        "id":"40",
+        "name":"test"
+    },
+    {
+        "id":"14",
+        "name":"test2"
+    }
+]
+
+}
+###

@@ -66,3 +66,14 @@ export const getOneCategories = async (req: Request, res: Response) => {
     res.status(BAD_REQUEST).json(error);
   }
 };
+export const addManyCategories = async (req: Request, res: Response) => {
+  const { inputCategories } = req.body;
+  try {
+    const categories = await categoryService.addCategories(
+      inputCategories as Prisma.CategoriesUncheckedCreateInput[]
+    );
+    res.status(CREATED).json(categories);
+  } catch (error) {
+    res.status(BAD_REQUEST).json(error);
+  }
+};

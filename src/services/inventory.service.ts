@@ -32,6 +32,7 @@ class InventoryService {
     const allInventory = await prisma.inventory.findMany();
     return allInventory;
   };
+
   findFreeInventory = async (): Promise<Inventory[]> => {
     return await inventory.findFreeInventory();
   };
