@@ -1,4 +1,4 @@
-import { UserInputModel } from "src/models/user.model";
+import { UserInputModel } from "../models/user.model";
 // import { userModel, allUsersModel } from "src/models/user.model";
 import User from "../repository/user.repository";
 

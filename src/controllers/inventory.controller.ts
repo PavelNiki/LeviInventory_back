@@ -1,7 +1,7 @@
 import { InventoryModel } from "./../models/inventory.model";
 import StatusCodes from "http-status-codes";
 import { Request, Response } from "express";
-import InventoryService from "src/services/inventory.service";
+import InventoryService from "../services/inventory.service";
 
 const { BAD_REQUEST, CREATED, OK } = StatusCodes;
 

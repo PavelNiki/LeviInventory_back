@@ -1,7 +1,7 @@
 import { Setups, Prisma } from "@prisma/client";
 import StatusCodes from "http-status-codes";
 import { Request, Response } from "express";
-import SetupService from "src/services/setup.service";
+import SetupService from "../services/setup.service";
 
 const { BAD_REQUEST, CREATED, OK } = StatusCodes;
 

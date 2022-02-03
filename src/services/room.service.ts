@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { Rooms, Prisma } from ".prisma/client";
 
-import Room from "src/repository/room.repository";
+import Room from "../repository/room.repository";
 
 const room = new Room();
 class RoomService {

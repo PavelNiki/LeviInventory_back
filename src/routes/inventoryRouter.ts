@@ -8,7 +8,7 @@ import {
   updateInventoryItem,
   deleteItem,
   makeAnInventory,
-} from "src/controllers/inventory.controller";
+} from "../controllers/inventory.controller";
 export const inventoryRouter = Router();
 
 inventoryRouter.post(

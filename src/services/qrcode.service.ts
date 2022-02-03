@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Inventory } from ".prisma/client";
-import { test } from "src/middleware/qrCodegenerator";
-import { prisma } from "src/prisma/prisma";
+import { test } from "../middleware/qrCodegenerator";
+import { prisma } from "../prisma/prisma";
 
 class QRC {
   createQrForAllInventory = async () => {

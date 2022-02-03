@@ -7,7 +7,7 @@ import {
   getAllCategories,
   getOneCategories,
   updateCategory,
-} from "src/controllers/category.controller";
+} from "../controllers/category.controller";
 
 export const categoryRouter = Router();
 

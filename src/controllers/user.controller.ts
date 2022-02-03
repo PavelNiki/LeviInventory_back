@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import StatusCodes from "http-status-codes";
 import { Request, Response } from "express";
-import UserService from "src/services/user.service";
+import UserService from "../services/user.service";
 import { isValid } from "../middleware/validate";
-import { UserInputModel } from "src/models/user.model";
+import { UserInputModel } from "../models/user.model";
 const { BAD_REQUEST, CREATED, OK } = StatusCodes;
 
 export const createUser = async (req: Request, res: Response) => {

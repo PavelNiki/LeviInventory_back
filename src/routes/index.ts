@@ -5,8 +5,8 @@ import { userRouter } from "./userRouter";
 import passport from "passport";
 import { roomRouter } from "./roomRouter";
 import { inventoryRouter } from "./inventoryRouter";
-import { getAllQrcode, getOneQrcode } from "src/controllers/qrcode.controller";
-import { authUser } from "src/controllers/auth.controller";
+import { getAllQrcode, getOneQrcode } from "../controllers/qrcode.controller";
+import { authUser } from "../controllers/auth.controller";
 import { categoryRouter } from "./categoryRouter";
 import { setupRouter } from "./setupRouter";
 

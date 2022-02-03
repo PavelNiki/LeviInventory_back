@@ -6,7 +6,7 @@ import { prisma } from "../prisma/prisma";
 import { InventoryModel } from "src/models/inventory.model";
 
 import { Prisma } from "@prisma/client";
-import Inventories from "src/repository/inventory.repository";
+import Inventories from "../repository/inventory.repository";
 // в qr инвенторя хранить name & inventoryId после сканирования на экране отображается инфа,
 // а значения пушатся в массив,котрый отправляется на бэк
 const inventory = new Inventories();

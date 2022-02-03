@@ -1,6 +1,6 @@
 import StatusCodes from "http-status-codes";
 import { Request, Response } from "express";
-import qrcodeService from "src/services/qrcode.service";
+import qrcodeService from "../services/qrcode.service";
 const { BAD_REQUEST, CREATED, OK } = StatusCodes;
 export const getAllQrcode = async (req: Request, res: Response) => {
   try {

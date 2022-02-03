@@ -1,4 +1,4 @@
-import categoryService from "src/services/category.service";
+import categoryService from "../services/category.service";
 import StatusCodes from "http-status-codes";
 import { Request, Response } from "express";
 import { Categories, Prisma } from "@prisma/client";

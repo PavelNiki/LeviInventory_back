@@ -1,4 +1,4 @@
-import Setup from "src/repository/setup.repository";
+import Setup from "../repository/setup.repository";
 import { Prisma, Setups } from "@prisma/client";
 const setup = new Setup();
 

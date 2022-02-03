@@ -1,4 +1,4 @@
-import AuthService from "src/services/auth.service";
+import AuthService from "../services/auth.service";
 import StatusCodes from "http-status-codes";
 import { Request, Response } from "express";
 const { BAD_REQUEST, CREATED, OK } = StatusCodes;

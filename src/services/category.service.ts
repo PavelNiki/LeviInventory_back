@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Categories, Prisma } from "@prisma/client";
 
-import Category from "src/repository/category.repository";
+import Category from "../repository/category.repository";
 
 const categories = new Category();
 class Categorys {

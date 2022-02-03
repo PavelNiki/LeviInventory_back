@@ -6,7 +6,7 @@ import {
   getAllRooms,
   createManyRooms,
   getOneRoom,
-} from "src/controllers/room.controller";
+} from "../controllers/room.controller";
 
 export const roomRouter = Router();
 

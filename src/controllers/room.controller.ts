@@ -1,6 +1,6 @@
 import StatusCodes from "http-status-codes";
 import { Request, Response } from "express";
-import RoomService from "src/services/room.service";
+import RoomService from "../services/room.service";
 import { Prisma, Rooms } from "@prisma/client";
 
 const { BAD_REQUEST, CREATED, OK } = StatusCodes;

@@ -4,7 +4,7 @@ import {
   addOne,
   deleteItem,
   updateItem,
-} from "src/controllers/setup.controller";
+} from "../controllers/setup.controller";
 
 export const setupRouter = Router();
 setupRouter.post("/add", addOne);

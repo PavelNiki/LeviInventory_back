@@ -5,7 +5,7 @@ import {
   getOneUser,
   getAllUsers,
   deleteUser,
-} from "src/controllers/user.controller";
+} from "../controllers/user.controller";
 export const userRouter = Router();
 userRouter.post(
   "/add",
