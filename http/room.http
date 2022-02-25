@@ -1,10 +1,10 @@
 
-Post http://localhost:8080/rooms/add
+Post https://levi-inventory-api.herokuapp.com/rooms/add
 Content-Type: application/json
 
 {
 
-"room":{"name":"node"}
+"name":"test"
 
 }
 
